@@ -15,7 +15,7 @@
 ```toml
 task_name = "" # (must be unique)
 task_type = "" # (daemon)|(habit)|(service)
-			   # daemon  -> it will run the specified command as a background process. e.g a Minecraft server.
+			   # daemon  -> it will run the specified command as a background process. e.g a game server.
 			   # habit   -> it will run the specified command on an interval. e.g checking the price of an item online
 			   # service -> it will run the specified command and return a result. e.g accepting an image file, and running an image recognition model on the script
 commands = []  
@@ -81,20 +81,20 @@ start_container_on_reboot = false
 
 ##### 2. daemon
 - **\$C** = client, **\$H** = host
-- **\$C** wants to host a Feed the Beast server using the daemon task
+- **\$C** wants to host a game server using the daemon task
 - **\$C** will submit the script for generating server files.
 - The generated start script has low default ram allocation, so 
 	- **\$C** will need **\$H** to run the setup commands
 	- **\$C** will then ssh into **\$H** and modify the script
 	- **\$C** will exit ssh, and submit a modification to the task
 ```toml
-task_name = "FTB Server" # (must be unique)
+task_name = "Game Server" # (must be unique)
 task_type = "daemon"
 commands = []
-setup_commands = ["chmod +x ./ftb-installer", "./ftb-installer"]
-# note: if "ftb-installer" required user input, we're better off building the server locally and passing the entire directory to the host
+setup_commands = ["chmod +x ./game-server-installer", "./game-server-installer"]
+# note: if "game-server-installer" required user input, we're better off building the server locally and passing the entire directory to the host
 # however, there should be a method for creating a task that does nothing, ssh-ing in to run the installer, and then modifying the task to run the start script
-necessary_files = ["./ftb-installer"]
+necessary_files = ["./game-server-installer"]
 run_in_docker = true
 
 [task_details]
@@ -115,7 +115,7 @@ start_container_on_reboot = false
 ```
 - Based on the above, the following occurs:
 	- A task is generated, with a folder matching the task name in our `~/.tasks` directory
-	- `ftb-installer` is remote-copied to **\$H** into the `~/.tasks/FTB_Server` directory
+	- `game-server-installer` is remote-copied to **\$H** into the `~/.tasks/Game_Server` directory (dir name based on task name)
 	- An Ubuntu 22.04 docker image is downloaded, and 'openjdk8-jdk' is downloaded onto it.
 	- A container is started from the aforementioned image, with the task directory mounted to the container
 	- The setup commands are executed, and then the container exits
