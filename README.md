@@ -122,3 +122,32 @@ start_container_on_reboot = false
 	- Because the "wait_after_setup" flag is set to true, we notify **\$C** that the setup process has completed. **\$C** will ssh in, modify the start script, and exit
 	- **\$C** will then send an edit-task message, informing **\$H** that the task has a new command and deciding whether it should re-run the setup commands. In this case, **\$C** does not want to re-run the setup commands.
 	- Now, the docker container starts again and performs the necessary commands. All complete.
+
+### Client Formatting
+```
+$ tnet --generate-only --type=service --run="myscript.py" --files=./*
+# -> Creates 'servicetask.toml' of type "service" with default entries. Service executes
+#    myscript.py on service calls, and attaches all files in current dir
+
+$ tnet --generate-only --name=temperature_monitor --type=habit --edit
+# -> Creates 'habittask.toml' of type habit with a name of "temperature_monitor" and
+#    otherwise default values. Uses default editor after generating boilerplate.
+
+$ tnet --generate-only --menu
+Which type of task do you want?
+->  Daemon  (Task runs as a background process, like a web server)
+    Habit   (Task runs every X interval, like a system backup)
+	  Service (Task runs when requested, like a printer request)
+
+Daemon selected.
+
+Choose a detail to edit (or 'q' to exit):
+    Task Type (*unsaved)
+->	Task Name
+		Service Settings
+		Docker Settings
+    Write Changes
+
+exiting...
+```
+
