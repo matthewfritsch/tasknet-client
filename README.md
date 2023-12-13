@@ -137,7 +137,7 @@ $ tnet --generate-only --menu
 Which type of task do you want?
 ->  Daemon  (Task runs as a background process, like a web server)
     Habit   (Task runs every X interval, like a system backup)
-	  Service (Task runs when requested, like a printer request)
+    Service (Task runs when requested, like a printer request)
 
 Daemon selected.
 
