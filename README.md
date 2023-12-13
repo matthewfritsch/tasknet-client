@@ -1,3 +1,5 @@
+## Think "popular established message-broker", except I'm the only one using it and it hasn't been developed yet.
+
 ### Server Machine
 - Should have a local port open, prepared to accept a new task
 - Should provide an easy entry point to working with the task

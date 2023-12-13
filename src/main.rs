@@ -8,11 +8,6 @@ static VERSION: &str = "0.1";
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    //standard flags
-    // #[arg(short, long)]
-    // help: bool,
-    // #[arg(short, long)]
-    // version: bool,
     #[arg(short, long)]
     generate_only: bool,
     task_type: Option<String>,
